@@ -11,25 +11,28 @@ public class WordCountTp {
 
 	public static void main(String[] args) {
 		TopologyBuilder builder = new TopologyBuilder();
-		builder.setSpout("productWordSpt", new MyWordSport());
-		builder.setBolt("splitBolt", new MyWordSplitBolt()).shuffleGrouping("productWordSpt");
-		builder.setBolt("counterBolt", new MyCounterBolt()).fieldsGrouping("split", new Fields("word"));
-		
+		builder.setSpout("productWordSpt", new MyWordSport(), 2);
+		builder.setBolt("splitBolt", new MyWordSplitBolt(), 2).shuffleGrouping("productWordSpt");
+		builder.setBolt("counterBolt", new MyCounterBolt(), 4).fieldsGrouping("splitBolt", new Fields("word"));
+
 		StormTopology wordcountTopology = builder.createTopology();
-		
+
 		Config config = new Config();
-		config.setDebug(true);
-		
+		// config.setDebug(true);
+
 		config.setNumWorkers(2);
-		
+
 		// 3.提交任务两种方式，集群模式和本地模式
-//		StormSubmitter.submitTopology("taowordcount", config, wordcountTopology);
-		
+		// StormSubmitter.submitTopology("taowordcount", config, wordcountTopology);
+
+		// LocalCluster localCluster = new LocalCluster();
+		// localCluster.submitTopology("taowordcount", config, wordcountTopology);
+		// Utils.sleep(100000);
+		// localCluster.killTopology("taowordcount");
+		// localCluster.shutdown();
+
 		LocalCluster localCluster = new LocalCluster();
-		localCluster.submitTopology("taowordcount", config, wordcountTopology);
-		Utils.sleep(100000);
-		localCluster.killTopology("taowordcount");
-		localCluster.shutdown();
+		localCluster.submitTopology("taowordcount", config, builder.createTopology());
 	}
 
 }

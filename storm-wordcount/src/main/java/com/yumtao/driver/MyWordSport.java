@@ -23,7 +23,7 @@ public class MyWordSport extends BaseRichSpout {
 	@Override
 	public void nextTuple() {
 		List<Object> randomEng = getRandomEng();
-		System.out.println("sport write : " + randomEng);
+		System.out.println(String.format("sport >> current thread is %d, write is %s", Thread.currentThread().getId(), randomEng));
 		collector.emit(randomEng);
 	}
 
@@ -34,14 +34,10 @@ public class MyWordSport extends BaseRichSpout {
 
 	public List<Object> getRandomEng() {
 		List<String> engList = new ArrayList<>();
-		engList.add("I am strong");
-		engList.add("I come from CN");
-		engList.add("Life is so nice");
-		engList.add("oh yes");
-		engList.add("oh lei oh lei");
+		engList.add("I am strong so big");
 
 		Random random = new Random();
-		int nextInt = random.nextInt(5);
+		int nextInt = random.nextInt(engList.size());
 
 		List<Object> result = new ArrayList<>();
 		result.add(engList.get(nextInt));

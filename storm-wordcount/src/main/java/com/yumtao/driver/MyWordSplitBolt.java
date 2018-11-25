@@ -26,12 +26,13 @@ public class MyWordSplitBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		String engs = input.getString(0);
+		System.out.println(String.format("split bolt >> current thread is %d, word is %s", Thread.currentThread().getId(), engs));
 		Arrays.asList(engs.split(" ")).stream().forEach(word -> {
 			outObj = new ArrayList<>();
 			outObj.add(word);
 			outObj.add(1);
 			
-			System.out.println("split bolt write : " + outObj);
+//			System.out.println("split bolt write : " + outObj);
 			collector.emit(outObj);
 		});
 	}
