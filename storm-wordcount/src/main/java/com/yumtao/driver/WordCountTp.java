@@ -38,7 +38,8 @@ public class WordCountTp {
 
 		// 本地模式
 		LocalCluster localCluster = new LocalCluster();
-		localCluster.submitTopology("taowordcount", config, builder.createTopology());
+		// 提交任务（任务名，配置，topology实例）
+		localCluster.submitTopology("taowordcount", config, wordcountTopology);
 	}
 
 }

@@ -14,16 +14,18 @@ public class MyCounterBolt extends BaseRichBolt {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Integer> counters = new HashMap<>();
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void prepare(Map stormConf, TopologyContext context, OutputCollector collector) {
-		
+
 	}
 
 	@Override
 	public void execute(Tuple input) {
 		String word = input.getStringByField("word");
-		
-		System.out.println(String.format("couter bolt 》》 current thread is %d, word is %s", Thread.currentThread().getId(), word));
+
+		System.out.println(
+				String.format("couter bolt 》》 current thread is %d, word is %s", Thread.currentThread().getId(), word));
 		if (!counters.containsKey(word)) {
 			counters.put(word, 1);
 		} else {
@@ -31,7 +33,7 @@ public class MyCounterBolt extends BaseRichBolt {
 		}
 //		System.out.println(counters);
 	}
-	
+
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
 		// TODO Auto-generated method stub
