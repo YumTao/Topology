@@ -37,8 +37,8 @@ public class MyWordSplitBolt extends BaseRichBolt {
 
 	/**
 	 * @notice emit()方法输出的List与 declareOutputFields()声明的field索引上相对应
-	 * @question emit()发射List为[value1, value2]， declareOutputFields()声明的field为【key1， key2】
-	 * @result 最后发射的tuple为 【key1， value1】【key2， value2】
+	 * @question emit()发射List为 [value1, value2], declareOutputFields()声明的field为[key1,key2]
+	 * @result 最后发射的tuple为 [key1, value1][key2, value2]
 	 */
 	@Override
 	public void execute(Tuple input) {
