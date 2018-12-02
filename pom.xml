@@ -9,6 +9,7 @@
 	<modules>
 		<module>com.yumtao.wordcount</module>
 		<module>storm-wordcount</module>
+		<module>kafka-strom_wt</module>
 	</modules>
 
 	<dependencies>
