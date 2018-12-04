@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.OutputFieldsDeclarer;
@@ -25,9 +27,12 @@ public class WordSpliter extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple input) {
-		// String line = input.getValue(0).toString();
-		String line = new String((byte[]) input.getValue(0));
-		System.out.println(String.format("split bolt read data %s", line));
+		String line = input.getValue(0).toString().trim();
+		if (StringUtils.isEmpty(line)) {
+			return;
+		}
+//		String line = new String((byte[]) input.getValue(0));
+		System.out.println(String.format("SPLIT BOLT read data %s", line));
 		Map<String, Integer> word2Count = new HashMap<>();
 		Arrays.asList(line.split(" ")).stream().forEach(word -> {
 			int count = word2Count.get(word) == null ? 0 : word2Count.get(word);

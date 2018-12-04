@@ -1,22 +1,20 @@
 package com.yumtao.driver;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
+import backtype.storm.StormSubmitter;
 import backtype.storm.generated.StormTopology;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 
 /**
- * Topology任务注册类
- * 1.指定sport实例
- * 2.指定bolt实例
- * 3.提交任务
+ * Topology任务注册类 1.指定sport实例 2.指定bolt实例 3.提交任务
+ * 
  * @author yumTao
  *
  */
 public class WordCountTp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		TopologyBuilder builder = new TopologyBuilder();
 		// 设置sport（id, sport实例，并发度）
 		builder.setSpout("productWordSpt", new MyWordSport(), 2);
@@ -34,12 +32,12 @@ public class WordCountTp {
 
 		// 3.提交任务两种方式，集群模式和本地模式
 		// 集群模式
-		// StormSubmitter.submitTopology("taowordcount", config, wordcountTopology);
+		StormSubmitter.submitTopology("taowordcount", config, wordcountTopology);
 
 		// 本地模式
-		LocalCluster localCluster = new LocalCluster();
-		// 提交任务（任务名，配置，topology实例）
-		localCluster.submitTopology("taowordcount", config, wordcountTopology);
+//		LocalCluster localCluster = new LocalCluster();
+//		// 提交任务（任务名，配置，topology实例）
+//		localCluster.submitTopology("taowordcount", config, wordcountTopology);
 	}
 
 }

@@ -24,7 +24,7 @@ public class WriterBolt extends BaseRichBolt {
 	public void execute(Tuple input) {
 		String word = input.getStringByField("word");
 		Integer count = input.getIntegerByField("count");
-		System.out.println(String.format("count thread: %s, read is :%s", Thread.currentThread().getId(), word));
+		System.out.println(String.format("COUNT BOLT thread: %s, read is :%s", Thread.currentThread().getId(), word));
 		int orgCount = result.get(word) == null ? 0 : result.get(word);
 		result.put(word, count + orgCount);
 		System.out.println(String.format("last word-count statistic Thread-Id is %s result is %s",

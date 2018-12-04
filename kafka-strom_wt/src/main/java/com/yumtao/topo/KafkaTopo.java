@@ -15,10 +15,10 @@ import storm.kafka.ZkHosts;
 
 public class KafkaTopo {
 
-	private static String ZK_HOST = "master2:2181,master2-standby:2181,master-standby:2181";
-//	private static String ZK_HOST = "singlenode:2181";
+//	private static String ZK_HOST = "master2:2181,master2-standby:2181,master-standby:2181";
+	private static String ZK_HOST = "singlenode:2181";
 	private static String TOPIC = "first";// 执行要消费的topic
-	private static String ZK_ROOT = "/kafka-offset";// zk上管理offset的位置
+	private static String ZK_ROOT = "/kafka-offset";// zk上管理offset的位置(随便定义)
 
 	private static String TP_ID = "kafkaStrom-wordCount";// topology ID
 	private static String SPOUT_ID = "kafkaStrom-sport";// sport ID
@@ -34,7 +34,7 @@ public class KafkaTopo {
 		BrokerHosts brokerHosts = new ZkHosts(ZK_HOST);
 		SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, TOPIC, ZK_ROOT, SPOUT_ID);
 //		spoutConfig.forceFromStart = true;// 从头开始读
-//		spoutConfig.scheme = new SchemeAsMultiScheme(new MessageScheme());
+		spoutConfig.scheme = new SchemeAsMultiScheme(new MessageScheme());
 
 		TopologyBuilder builder = new TopologyBuilder();
 		builder.setSpout(SPOUT_ID, new KafkaSpout(spoutConfig));

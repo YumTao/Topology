@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -9,96 +10,66 @@
 	<artifactId>kafka-strom_wt</artifactId>
 
 	<dependencies>
-
-		<!-- kafka依赖 -->
-		<!-- <dependency> <groupId>org.apache.kafka</groupId> <artifactId>kafka-clients</artifactId> 
-			<version>0.9.0.1</version> </dependency> -->
-		<!-- storm整合kafka -->
-		<!-- <dependency>
+		<dependency>
+			<!-- kafka与storm整合依赖 -->
 			<groupId>org.apache.storm</groupId>
 			<artifactId>storm-kafka</artifactId>
 			<version>0.9.5</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
+			<groupId>org.clojure</groupId>
+			<artifactId>clojure</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+
+		<!-- kafka依赖，注意与broker的版本保持一致 -->
+		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka_2.11</artifactId>
-			<version>0.9.0.1</version>
+			<version>0.8.2.2</version>
 			<exclusions>
+				<exclusion>
+					<artifactId>jmxtools</artifactId>
+					<groupId>com.sun.jdmk</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jmxri</artifactId>
+					<groupId>com.sun.jmx</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jms</artifactId>
+					<groupId>javax.jms</groupId>
+				</exclusion>
 				<exclusion>
 					<groupId>org.apache.zookeeper</groupId>
 					<artifactId>zookeeper</artifactId>
 				</exclusion>
 				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-log4j12</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
 			</exclusions>
-		</dependency> -->
-		
-		
-		
-		
-        <dependency>
-            <groupId>org.apache.storm</groupId>
-            <artifactId>storm-kafka</artifactId>
-            <version>0.9.5</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.clojure</groupId>
-            <artifactId>clojure</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka_2.8.2</artifactId>
-            <version>0.8.1</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jmxtools</artifactId>
-                    <groupId>com.sun.jdmk</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxri</artifactId>
-                    <groupId>com.sun.jmx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jms</artifactId>
-                    <groupId>javax.jms</groupId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.zookeeper</groupId>
-                    <artifactId>zookeeper</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.4</version>
-        </dependency>
-		
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
+		</dependency>
+
 	</dependencies>
 </project>
