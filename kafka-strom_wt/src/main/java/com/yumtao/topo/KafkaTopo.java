@@ -35,9 +35,10 @@ public class KafkaTopo {
 		SpoutConfig spoutConfig = new SpoutConfig(brokerHosts, TOPIC, ZK_ROOT, SPOUT_ID);
 //		spoutConfig.forceFromStart = true;// 从头开始读
 		spoutConfig.scheme = new SchemeAsMultiScheme(new MessageScheme());
+		KafkaSpout kafkaSpout = new KafkaSpout(spoutConfig);
 
 		TopologyBuilder builder = new TopologyBuilder();
-		builder.setSpout(SPOUT_ID, new KafkaSpout(spoutConfig));
+		builder.setSpout(SPOUT_ID, kafkaSpout);
 		builder.setBolt(PRE_BOLT_ID, new WordSpliter()).shuffleGrouping(SPOUT_ID);
 		builder.setBolt(OUT_BOLT_ID, new WriterBolt(), 4).fieldsGrouping(PRE_BOLT_ID, new Fields("word"));
 		Config conf = new Config();
