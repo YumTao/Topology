@@ -36,14 +36,14 @@ public class BizMsgBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		String logLine = input.getString(0);
-		BaseLog.getDailyLog().info("Bolt: BizMsg READ tuple: {}", logLine);
+		BaseLog.getDailyLog().debug("Bolt: BizMsg READ tuple: {}", logLine);
 		if (StringUtils.isEmpty(logLine)) {
 			return;
 		}
 
 		List<Object> tuple = getTupleFromLine(logLine);
 		if (null != tuple) {
-			BaseLog.getDailyLog().info("Bolt: BizMsg WRITE tuple: {}", tuple);
+			BaseLog.getDailyLog().debug("Bolt: BizMsg WRITE tuple: {}", tuple);
 			collector.emit(tuple);
 		}
 

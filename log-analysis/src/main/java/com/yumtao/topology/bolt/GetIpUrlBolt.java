@@ -40,7 +40,7 @@ public class GetIpUrlBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		String bizMsg = input.getStringByField("bizMsg");
-		BaseLog.getDailyLog().info("Bolt: GetIpUrl READ tuple: {}", bizMsg);
+		BaseLog.getDailyLog().debug("Bolt: GetIpUrl READ tuple: {}", bizMsg);
 		if (bizMsg.contains(ipDesc) && bizMsg.contains(urlDesc)) {
 			Map<String, String> ip2UrlMap = getIpAndUrlMap(bizMsg);
 			for (String ip : ip2UrlMap.keySet()) {
