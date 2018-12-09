@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.yumtao.common.log.BaseLog;
+import com.yumtao.common.BaseLog;
 
 /**
  * 日期工具类

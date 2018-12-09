@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yumtao.common.log.BaseLog;
+import com.yumtao.common.BaseLog;
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -16,7 +16,9 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 
 /**
- * 获取业务信息，并发送出去
+ * @desc 获取业务信息，并发送出去
+ * @in 2018-12-06 15:49:06.722 INFO [cn.yqt.springmvc.web.filter.ForCrawlerFilter.doFilter:58] access ip: 180.169.135.186, url: /
+ * @out access ip: 180.169.135.186, url: /
  * @author yumTao
  *
  */
@@ -34,14 +36,14 @@ public class BizMsgBolt extends BaseRichBolt {
 	@Override
 	public void execute(Tuple input) {
 		String logLine = input.getString(0);
-		BaseLog.getDailyLog().info("LogSplitBolt READ tuple: {}", logLine);
+		BaseLog.getDailyLog().info("Bolt: BizMsg READ tuple: {}", logLine);
 		if (StringUtils.isEmpty(logLine)) {
 			return;
 		}
 
 		List<Object> tuple = getTupleFromLine(logLine);
 		if (null != tuple) {
-			BaseLog.getDailyLog().info("LogSplitBolt WRITE tuple: {}", tuple);
+			BaseLog.getDailyLog().info("Bolt: BizMsg WRITE tuple: {}", tuple);
 			collector.emit(tuple);
 		}
 
@@ -51,13 +53,12 @@ public class BizMsgBolt extends BaseRichBolt {
 		List<Object> tuple = null;
 		try {
 			List<String> logMsgs = Arrays.asList(logLine.split(" "));
-			String logLevel = logMsgs.get(2);
 			String bizMsg = "";
 			for (int i = 4; i < logMsgs.size(); i++) {
-				bizMsg += logMsgs.get(i);
+				bizMsg += " " + logMsgs.get(i);
 			}
 
-			tuple = Arrays.asList(Arrays.asList(logLevel, bizMsg).toArray());
+			tuple = Arrays.asList(Arrays.asList(bizMsg).toArray());
 		} catch (Exception e) {
 			BaseLog.getDailyLog().info("not common type log: {}, emit it on same in", logLine);
 		}

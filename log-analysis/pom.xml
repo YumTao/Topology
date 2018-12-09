@@ -81,5 +81,25 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>1.7.25</version>
 		</dependency>
+
+		<!-- redis -->
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.37</version>
+		</dependency>
+
 	</dependencies>
 </project>
